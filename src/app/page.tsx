@@ -10,18 +10,14 @@ import {
   ArrowRightLeft,
   Search,
   Sparkles,
-  ShieldCheck,
   Zap,
   Clock,
   Award,
-  Download,
   Share2,
   CheckCircle2,
-  Lock,
   ArrowRight,
 } from 'lucide-react';
-import BusPassPreview from '@/components/passes/BusPassPreview';
-import { BUS_TICKET_LOGO_BASE64, VOLVO_BUS_IMAGE_BASE64 } from '@/lib/ticketImages';
+import { BUS_TICKET_LOGO_BASE64 } from '@/lib/ticketImages';
 
 export default function LandingPage() {
   const [fromCity, setFromCity] = useState('Gopalganj');
@@ -32,22 +28,6 @@ export default function LandingPage() {
   const swapCities = () => {
     setFromCity(toCity);
     setToCity(fromCity);
-  };
-
-  const samplePass = {
-    ticketNumber: '157',
-    passengerName: 'Raju Kumar Singh',
-    mobileNumber: '7488202225',
-    fromLocation: fromCity || 'Gopalganj',
-    toLocation: toCity || 'Delhi',
-    dateOfJourney: journeyDate || '2026-07-28',
-    validUntil: '2026-06-26',
-    advanceAmount: 500,
-    balanceAmount: 3500,
-    fareAmount: 4000,
-    seatCount: '1 seat',
-    sleeperCount: '2 sleeper',
-    busNumber: 'VOLVO B11R',
   };
 
   return (
@@ -82,14 +62,14 @@ export default function LandingPage() {
             <a href="#search-widget" className="hover:text-white transition-colors">
               Book Tickets
             </a>
-            <a href="#preview" className="hover:text-white transition-colors">
-              Live Preview
-            </a>
             <a href="#routes" className="hover:text-white transition-colors">
               Bus Routes
             </a>
             <a href="#offers" className="hover:text-white transition-colors">
               Offers
+            </a>
+            <a href="#contact" className="hover:text-white transition-colors">
+              Contact Us
             </a>
           </nav>
 
@@ -272,44 +252,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 4. LIVE PRINTABLE TICKET PREVIEW SECTION (ConfirmTkt Style) */}
-      <section id="preview" className="py-12 bg-white border-y border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
-            <span className="px-3 py-1 rounded-full bg-blue-50 text-[#002970] text-xs font-extrabold uppercase tracking-wider border border-blue-200">
-              Ticket Layout Preview
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
-              Live Maa Laxmi Travels Bus Pass
-            </h2>
-            <p className="text-slate-500 text-xs sm:text-sm">
-              Real-time updated preview matching your selected route details
-            </p>
-          </div>
-
-          {/* Ticket Render Container */}
-          <div className="bg-[#f4f7fb] p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-lg">
-            <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-200">
-              <span className="text-xs font-extrabold text-[#002970] uppercase tracking-wider flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                <span>Official Bus Ticket Template</span>
-              </span>
-              <Link
-                href="/login"
-                className="text-xs font-extrabold text-white bg-[#002970] hover:bg-[#001f54] px-3 py-1.5 rounded-md shadow flex items-center gap-1"
-              >
-                <Lock className="w-3.5 h-3.5" />
-                <span>Login to Portal</span>
-              </Link>
-            </div>
-
-            {/* Ticket Preview */}
-            <BusPassPreview pass={samplePass} />
-          </div>
-        </div>
-      </section>
-
-      {/* 5. POPULAR BUS ROUTES GRID (ConfirmTkt Cards) */}
+      {/* 4. POPULAR BUS ROUTES GRID (ConfirmTkt Cards) */}
       <section id="routes" className="py-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900">Popular Travel Routes</h2>
@@ -379,7 +322,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 6. CONFIRMTKT FOOTER */}
+      {/* 5. CONFIRMTKT FOOTER */}
       <footer id="contact" className="bg-[#001f54] text-white py-12 text-xs">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-blue-900">
