@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { Lock, Mail, Eye, EyeOff, Sparkles } from 'lucide-react';
+import Link from 'next/link';
+import { Lock, Mail, Eye, EyeOff, Sparkles, ArrowLeft } from 'lucide-react';
 import { BUS_TICKET_LOGO_BASE64 } from '@/lib/ticketImages';
 
 export default function LoginPage() {
@@ -45,6 +46,17 @@ export default function LoginPage() {
       className="min-h-screen flex items-center justify-center relative overflow-hidden font-sans"
       style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #091e42 100%)' }}
     >
+      {/* Top Header with Back to Home Button */}
+      <div className="absolute top-6 left-6 z-20">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 text-xs font-bold transition-all shadow-lg backdrop-blur-md group"
+        >
+          <ArrowLeft className="w-4 h-4 text-blue-400 group-hover:-translate-x-1 transition-transform" />
+          <span>Back to Home</span>
+        </Link>
+      </div>
+
       {/* Background Orbs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div
@@ -57,19 +69,21 @@ export default function LoginPage() {
         />
       </div>
 
-      <div className="w-full max-w-md mx-4 relative z-10">
-        {/* Logo Section */}
+      <div className="w-full max-w-md mx-4 relative z-10 my-12">
+        {/* Logo Section (Clickable to Home) */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center p-2 rounded-2xl bg-white shadow-xl border-2 border-blue-400 mb-3">
-            <img
-              src={BUS_TICKET_LOGO_BASE64}
-              alt="Maa Laxmi Travels"
-              className="h-16 w-auto object-contain"
-            />
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">
-            MAA LAXMI TRAVELS
-          </h1>
+          <Link href="/" className="inline-block group cursor-pointer">
+            <div className="inline-flex items-center justify-center p-2 rounded-2xl bg-white shadow-xl border-2 border-blue-400 mb-3 group-hover:scale-105 transition-transform">
+              <img
+                src={BUS_TICKET_LOGO_BASE64}
+                alt="Maa Laxmi Travels"
+                className="h-16 w-auto object-contain"
+              />
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase group-hover:text-blue-300 transition-colors">
+              MAA LAXMI TRAVELS
+            </h1>
+          </Link>
           <p className="text-blue-300 text-xs font-semibold mt-1 flex items-center justify-center gap-1">
             <Sparkles className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
             Official Bus Pass & Ticket Portal
