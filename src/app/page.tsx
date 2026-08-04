@@ -5,8 +5,6 @@ import {
   ShieldCheck,
   Download,
   Share2,
-  FileText,
-  Bus,
   MapPin,
   Phone,
   User,
@@ -15,7 +13,6 @@ import {
   CheckCircle2,
   Clock,
   CreditCard,
-  Building,
 } from 'lucide-react';
 import BusPassPreview from '@/components/passes/BusPassPreview';
 import { BUS_TICKET_LOGO_BASE64, VOLVO_BUS_IMAGE_BASE64 } from '@/lib/ticketImages';
@@ -70,7 +67,7 @@ export default function LandingPage() {
               Features
             </a>
             <a href="#preview" className="hover:text-white transition-colors">
-              Live Ticket
+              Live Ticket Preview
             </a>
             <a href="#routes" className="hover:text-white transition-colors">
               Popular Routes
@@ -165,41 +162,46 @@ export default function LandingPage() {
 
             {/* Hero Visual Column (Volvo Bus Render Card) */}
             <div className="lg:col-span-5">
-              <div className="relative rounded-3xl p-4 bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 shadow-2xl overflow-hidden group">
-                <div className="absolute top-0 right-0 px-4 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black text-xs uppercase tracking-widest rounded-bl-2xl shadow">
-                  ★ LUXURY VOLVO B11R ★
-                </div>
+              <Link href="/passes/new" className="block group">
+                <div className="relative rounded-3xl p-4 bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 shadow-2xl overflow-hidden transition-all duration-300 group-hover:border-blue-500/50">
+                  <div className="absolute top-0 right-0 px-4 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black text-xs uppercase tracking-widest rounded-bl-2xl shadow">
+                    ★ LUXURY VOLVO B11R ★
+                  </div>
 
-                <div className="mt-4 rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-inner">
-                  <img
-                    src={VOLVO_BUS_IMAGE_BASE64}
-                    alt="Maa Laxmi Travels Volvo Bus"
-                    className="w-full h-64 sm:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
+                  <div className="mt-4 rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-inner">
+                    <img
+                      src={VOLVO_BUS_IMAGE_BASE64}
+                      alt="Maa Laxmi Travels Volvo Bus"
+                      className="w-full h-64 sm:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
 
-                <div className="p-4 space-y-2 text-center">
-                  <h3 className="text-xl font-extrabold text-white">Maa Laxmi Travels Gopalganj</h3>
-                  <p className="text-xs text-slate-400 flex items-center justify-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-red-400" />
-                    <span>Banjari Pokhara, Shiv Mandir, Gopalganj</span>
-                  </p>
-                  <div className="pt-2 flex items-center justify-center gap-2 text-xs font-bold text-slate-300">
-                    <span className="px-3 py-1 rounded-full bg-blue-950 text-blue-300 border border-blue-800">
-                      AC Sleeper Coach
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800">
-                      Mo. 7488202225
-                    </span>
+                  <div className="p-4 space-y-2 text-center">
+                    <h3 className="text-xl font-extrabold text-white group-hover:text-blue-400 transition-colors flex items-center justify-center gap-2">
+                      <span>Maa Laxmi Travels Gopalganj</span>
+                      <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </h3>
+                    <p className="text-xs text-slate-400 flex items-center justify-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-red-400" />
+                      <span>Banjari Pokhara, Shiv Mandir, Gopalganj</span>
+                    </p>
+                    <div className="pt-2 flex items-center justify-center gap-2 text-xs font-bold text-slate-300">
+                      <span className="px-3 py-1 rounded-full bg-blue-950 text-blue-300 border border-blue-800">
+                        AC Sleeper Coach
+                      </span>
+                      <span className="px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800">
+                        Mo. 7488202225
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. LIVE SAMPLE TICKET PREVIEW SECTION */}
+      {/* 3. LIVE PRINTABLE TICKET PREVIEW SECTION */}
       <section id="preview" className="py-16 bg-slate-950 border-y border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
@@ -214,23 +216,38 @@ export default function LandingPage() {
             </p>
           </div>
 
-          {/* Ticket Render Card Container */}
-          <div className="max-w-4xl mx-auto bg-slate-900 p-4 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl">
-            <BusPassPreview pass={samplePass} />
+          {/* Ticket Render Card Container (Interactive & Clickable to Ticket Generator Page) */}
+          <div className="max-w-4xl mx-auto">
+            <Link href="/passes/new" className="block group">
+              <div className="bg-slate-900 p-4 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl group-hover:border-blue-500/60 transition-all duration-300 relative">
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                  <span className="text-xs sm:text-sm font-extrabold text-blue-400 uppercase tracking-wider flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-amber-400 fill-amber-400" />
+                    <span>Live Ticket Layout — Click Anywhere to Customize & Download</span>
+                  </span>
+                  <span className="text-xs font-extrabold text-white bg-blue-600 hover:bg-blue-500 px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow">
+                    <span>Open Generator</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </div>
 
-            <div className="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Base64 embedded images ensure 100% download accuracy</span>
+                {/* Live Ticket Template Component */}
+                <BusPassPreview pass={samplePass} />
+
+                <div className="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    <span>Base64 embedded images ensure 100% download accuracy</span>
+                  </div>
+                  <div
+                    className="px-6 py-3 rounded-xl text-sm font-extrabold text-white bg-gradient-to-r from-blue-600 to-indigo-600 group-hover:from-blue-500 group-hover:to-indigo-500 shadow-lg shadow-blue-600/30 transition-all flex items-center gap-2"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Create Your Own Ticket</span>
+                  </div>
+                </div>
               </div>
-              <Link
-                href="/passes/new"
-                className="px-6 py-3 rounded-xl text-sm font-extrabold text-white bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/30 transition-all flex items-center gap-2"
-              >
-                <Download className="w-4 h-4" />
-                <span>Create Your Own Ticket</span>
-              </Link>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -252,70 +269,82 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 hover:border-blue-500/50 transition-all duration-300 space-y-4 group">
-              <div className="w-12 h-12 rounded-xl bg-blue-600/15 border border-blue-500/30 text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Ticket className="w-6 h-6" />
+            <Link href="/passes/new" className="block group">
+              <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 group-hover:border-blue-500/50 transition-all duration-300 space-y-4 h-full">
+                <div className="w-12 h-12 rounded-xl bg-blue-600/15 border border-blue-500/30 text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Ticket className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">Instant Ticket Generator</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Fill in passenger details, dates, ticket numbers, bus models, and payment amounts to see a real-time live preview immediately.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-white">Instant Ticket Generator</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Fill in passenger details, dates, ticket numbers, bus models, and payment amounts to see a real-time live preview immediately.
-              </p>
-            </div>
+            </Link>
 
             {/* Feature 2 */}
-            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 hover:border-blue-500/50 transition-all duration-300 space-y-4 group">
-              <div className="w-12 h-12 rounded-xl bg-amber-600/15 border border-amber-500/30 text-amber-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Download className="w-6 h-6" />
+            <Link href="/passes/new" className="block group">
+              <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 group-hover:border-amber-500/50 transition-all duration-300 space-y-4 h-full">
+                <div className="w-12 h-12 rounded-xl bg-amber-600/15 border border-amber-500/30 text-amber-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Download className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">High-DPI PNG & PDF Downloads</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Download tickets as crisp, high-resolution PNG image files or multi-page printable PDFs with embedded logo graphics.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-white">High-DPI PNG & PDF Downloads</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Download tickets as crisp, high-resolution PNG image files or multi-page printable PDFs with embedded logo graphics.
-              </p>
-            </div>
+            </Link>
 
             {/* Feature 3 */}
-            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 hover:border-blue-500/50 transition-all duration-300 space-y-4 group">
-              <div className="w-12 h-12 rounded-xl bg-emerald-600/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Share2 className="w-6 h-6" />
+            <Link href="/passes/new" className="block group">
+              <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 group-hover:border-emerald-500/50 transition-all duration-300 space-y-4 h-full">
+                <div className="w-12 h-12 rounded-xl bg-emerald-600/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Share2 className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Direct WhatsApp Share</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Send ticket details, passenger info, and booking summaries directly to passengers' mobile numbers via WhatsApp with one click.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-white">Direct WhatsApp Share</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Send ticket details, passenger info, and booking summaries directly to passengers' mobile numbers via WhatsApp with one click.
-              </p>
-            </div>
+            </Link>
 
             {/* Feature 4 */}
-            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 hover:border-blue-500/50 transition-all duration-300 space-y-4 group">
-              <div className="w-12 h-12 rounded-xl bg-indigo-600/15 border border-indigo-500/30 text-indigo-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Clock className="w-6 h-6" />
+            <Link href="/history" className="block group">
+              <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 group-hover:border-indigo-500/50 transition-all duration-300 space-y-4 h-full">
+                <div className="w-12 h-12 rounded-xl bg-indigo-600/15 border border-indigo-500/30 text-indigo-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Clock className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">Complete Ticket History</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Search, filter, edit, or re-download any previously generated bus pass from your central ticket history log.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-white">Complete Ticket History</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Search, filter, edit, or re-download any previously generated bus pass from your central ticket history log.
-              </p>
-            </div>
+            </Link>
 
             {/* Feature 5 */}
-            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 hover:border-blue-500/50 transition-all duration-300 space-y-4 group">
-              <div className="w-12 h-12 rounded-xl bg-purple-600/15 border border-purple-500/30 text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <CreditCard className="w-6 h-6" />
+            <Link href="/passes/new" className="block group">
+              <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 group-hover:border-purple-500/50 transition-all duration-300 space-y-4 h-full">
+                <div className="w-12 h-12 rounded-xl bg-purple-600/15 border border-purple-500/30 text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <CreditCard className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">Advance & Balance Tracker</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Automatically calculates remaining balance amounts based on advance payments so passengers always have clear payment receipts.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-white">Advance & Balance Tracker</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Automatically calculates remaining balance amounts based on advance payments so passengers always have clear payment receipts.
-              </p>
-            </div>
+            </Link>
 
             {/* Feature 6 */}
-            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 hover:border-blue-500/50 transition-all duration-300 space-y-4 group">
-              <div className="w-12 h-12 rounded-xl bg-rose-600/15 border border-rose-500/30 text-rose-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <ShieldCheck className="w-6 h-6" />
+            <Link href="/login" className="block group">
+              <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 group-hover:border-rose-500/50 transition-all duration-300 space-y-4 h-full">
+                <div className="w-12 h-12 rounded-xl bg-rose-600/15 border border-rose-500/30 text-rose-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-white group-hover:text-rose-400 transition-colors">Role-Based Security</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Secure credentials authentication for admins and staff operators with system reports and user management controls.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-white">Role-Based Security</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Secure credentials authentication for admins and staff operators with system reports and user management controls.
-              </p>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -329,45 +358,45 @@ export default function LandingPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+            <Link href="/passes/new" className="p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500/50 flex items-center justify-between transition-all group">
               <div>
                 <p className="text-xs font-semibold text-slate-400">From Gopalganj</p>
-                <p className="text-base font-black text-white">➡ Delhi</p>
+                <p className="text-base font-black text-white group-hover:text-blue-400 transition-colors">➡ Delhi</p>
               </div>
               <span className="px-2.5 py-1 rounded-md text-[10px] font-black bg-blue-900/60 text-blue-300 border border-blue-700">
                 DAILY
               </span>
-            </div>
+            </Link>
 
-            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+            <Link href="/passes/new" className="p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500/50 flex items-center justify-between transition-all group">
               <div>
                 <p className="text-xs font-semibold text-slate-400">From Gopalganj</p>
-                <p className="text-base font-black text-white">➡ Patna</p>
+                <p className="text-base font-black text-white group-hover:text-blue-400 transition-colors">➡ Patna</p>
               </div>
               <span className="px-2.5 py-1 rounded-md text-[10px] font-black bg-blue-900/60 text-blue-300 border border-blue-700">
                 DAILY
               </span>
-            </div>
+            </Link>
 
-            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+            <Link href="/passes/new" className="p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500/50 flex items-center justify-between transition-all group">
               <div>
                 <p className="text-xs font-semibold text-slate-400">From Gopalganj</p>
-                <p className="text-base font-black text-white">➡ Lucknow</p>
+                <p className="text-base font-black text-white group-hover:text-blue-400 transition-colors">➡ Lucknow</p>
               </div>
               <span className="px-2.5 py-1 rounded-md text-[10px] font-black bg-blue-900/60 text-blue-300 border border-blue-700">
                 DAILY
               </span>
-            </div>
+            </Link>
 
-            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+            <Link href="/passes/new" className="p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500/50 flex items-center justify-between transition-all group">
               <div>
                 <p className="text-xs font-semibold text-slate-400">From Gopalganj</p>
-                <p className="text-base font-black text-white">➡ Gorakhpur</p>
+                <p className="text-base font-black text-white group-hover:text-blue-400 transition-colors">➡ Gorakhpur</p>
               </div>
               <span className="px-2.5 py-1 rounded-md text-[10px] font-black bg-blue-900/60 text-blue-300 border border-blue-700">
                 DAILY
               </span>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
