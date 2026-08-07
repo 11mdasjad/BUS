@@ -4,6 +4,8 @@ import dbConnect from '@/lib/mongodb';
 import User from '@/models/User';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || 'buspass-secret-key-change-in-production-2024',
+  trustHost: true,
   providers: [
     Credentials({
       name: 'credentials',
@@ -77,5 +79,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   pages: {
     signIn: '/login',
+    error: '/login',
   },
 });
